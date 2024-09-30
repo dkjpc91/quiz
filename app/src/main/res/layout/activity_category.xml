@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.CategoryActivity">
+
+    <ImageView
+        android:layout_marginTop="4dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/appbarheading"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/learnsource"
+        android:background="@drawable/grid_bg"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FF6F6F"
+            android:layout_gravity="center"
+            android:padding="8dp" />
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@drawable/bottom_nav_bg" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:listitem="@layout/categoryitem"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

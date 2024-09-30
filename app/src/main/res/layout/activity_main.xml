@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity">
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/homefullscreenbanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo"/>
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbanner"
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            app:collapsedTitleGravity="center"
+            app:expandedTitleTextColor="#F41505"
+            app:expandedTitleTextAppearance="?attr/actionBarTheme"
+            app:collapsedTitleTextColor="#F41505"
+            app:collapsedTitleTextAppearance="@style/CollapsedTitleTextStyle"
+            app:titleCollapseMode="scale"
+            app:contentScrim="#E8F1F0"
+
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            style="?attr/collapsingToolbarLayoutLargeSize"
+            android:layout_height="450dp">
+
+            <ImageView
+                android:visibility="visible"
+
+                android:id="@+id/appbanneriv"
+                android:layout_marginTop="99dp"
+                android:clipToOutline="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/logo"
+                app:layout_collapseMode="parallax"
+                android:scaleType="center" />
+
+
+
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:title="@string/app_name"
+                app:titleMargin="0dp"
+                android:background="@drawable/home_title_bg"
+                app:titleTextAppearance="?attr/actionBarTheme"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                app:titleCentered="true">
+
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:id="@+id/appbarheading"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/learnsource"
+                android:background="@drawable/grid_bg"/>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:orientation="vertical">
+
+
+            <GridLayout
+                android:visibility="visible"
+                android:id="@+id/homeviewsubjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="5"
+                android:padding="16dp"
+                android:layout_gravity="center">
+                <FrameLayout
+                    android:id="@+id/gk"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/generalknowledge"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="General Knowledge"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/pexams"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/star"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Professional Exams"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/maths"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/maths"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Math"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/computer"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/computer"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Computer"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/chemistry"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/flask"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chemistry"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/biology"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/bio"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Biology"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/physics"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/physics"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Physics"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/economics"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/grid_bg">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/economics"
+                            app:tint="@color/blue" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Economics"
+                            style="@style/gridtextstyle"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Repeat the FrameLayout block for other items -->
+
+            </GridLayout>
+
+
+
+
+
+
+
+            <View
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"/>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
