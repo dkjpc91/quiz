@@ -1,11 +1,15 @@
 package com.mithilakshar.learnsource.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mithilakshar.learnsource.Activity.CategoryDetailActivity
+import com.mithilakshar.learnsource.Data.categorynestedlistdataclass
 import com.mithilakshar.learnsource.Utility.dbHelper
 import com.mithilakshar.learnsource.databinding.CategoryitemBinding
+import java.io.Serializable
 
 class categoryAdapter(
     private val context: Context,
@@ -23,6 +27,16 @@ class categoryAdapter(
             val nestedCategoryList = categoryvalue?.let { filterByCategory(categorylist, it) }
             val nestedAdapter = nestedCategoryList?.let { categoryNestedAdapter(context, it) }
              binding.nestedcategoryrecycler .adapter = nestedAdapter
+
+            binding.seeAllBtn.setOnClickListener {
+                val intent= Intent(context,CategoryDetailActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val category = categorynestedlistdataclass(nestedCategoryList ?: emptyList())
+                intent.putExtra("nestedCategoryList", category)
+                context.startActivity(intent)
+
+            }
+
 
         }
 
@@ -62,6 +76,7 @@ class categoryAdapter(
         }
         return uniqueList
     }
+
 
 
 }

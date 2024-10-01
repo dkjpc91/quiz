@@ -337,6 +337,7 @@ class dbHelper(context: Context, dbName: String) {
                 put("imageurl", "")
                 put("videourl", "")
                 put("dburl", "")
+                put("filename", "")
             }
             subjectList.add(defaultRow)
         }

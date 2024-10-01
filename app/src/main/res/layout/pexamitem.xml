@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/pexammain"
+        android:layout_gravity="bottom"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:background="@drawable/grid_bg">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/pexamimage"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/star"
+                app:tint="@color/blue" />
+
+            <TextView
+                android:id="@+id/pexamtext"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Math"
+                style="@style/gridtextstyle"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

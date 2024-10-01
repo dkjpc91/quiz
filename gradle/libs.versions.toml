@@ -16,6 +16,7 @@ gson = "2.10.1"
 kotlinxCoroutinesAndroid = "1.7.3"
 lifecycleLivedataKtx = "2.8.4"
 googleGmsGoogleServices = "4.4.2"
+okhttp = "4.12.0"
 reviewKtx = "2.0.1"
 roomKtx = "2.6.1"
 viewpager = "1.0.0"
@@ -42,6 +43,7 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 androidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomKtx" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "reviewKtx" }
 
 androidx-viewpager = { module = "androidx.viewpager:viewpager", version.ref = "viewpager" }

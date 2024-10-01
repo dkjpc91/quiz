@@ -9,39 +9,40 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mithilakshar.learnsource.Adapter.categoryAdapter
+import com.mithilakshar.learnsource.Adapter.categoryDetailAdapter
+import com.mithilakshar.learnsource.Data.categorynestedlistdataclass
 import com.mithilakshar.learnsource.R
 import com.mithilakshar.learnsource.Utility.dbHelper
-import com.mithilakshar.learnsource.databinding.ActivityCategoryBinding
+import com.mithilakshar.learnsource.databinding.ActivityCategoryDetailBinding
+import java.io.Serializable
 
-class CategoryActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityCategoryBinding
+class CategoryDetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCategoryDetailBinding
+    private lateinit var categorydetailadapter: categoryDetailAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var categoryadapter: categoryAdapter
-    private lateinit var dbhelper: dbHelper
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding=ActivityCategoryBinding.inflate(layoutInflater)
+        binding=ActivityCategoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val dbName = intent.getStringExtra("dbname")
-        Log.d("dbName", "db name $dbName.db")
-        Log.d("dbName", "table name $dbName")
-        dbhelper=dbHelper(this@CategoryActivity, "$dbName.db")
 
-        val subjectlist= dbName?.let { dbhelper.getAllRows(it) }
 
-        Log.d("dbName", "table name $subjectlist")
-       categoryadapter= subjectlist?.let { categoryAdapter(this, it,dbhelper,dbName) }!!
-        recyclerView=binding.categoryrecycler
-       recyclerView.layoutManager=LinearLayoutManager(this)
-       recyclerView.adapter=categoryadapter
+         val category = intent.getSerializableExtra("nestedCategoryList") as? categorynestedlistdataclass
+        Log.d("nestedCategoryList", "table name $category")
+
+        val nestedCategoryList = category?.categories
+        categorydetailadapter= nestedCategoryList?.let { categoryDetailAdapter(this, it )}!!
+        recyclerView=binding.categorydetailrecycler
+
+        recyclerView.adapter=categorydetailadapter
+
     }
+
+
 }

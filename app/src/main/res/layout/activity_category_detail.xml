@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.CategoryActivity">
+    tools:context=".Activity.CategoryDetailActivity">
 
     <ImageView
         android:layout_marginTop="4dp"
@@ -42,11 +42,12 @@
             android:background="@drawable/bottom_nav_bg" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categoryrecycler"
+        android:id="@+id/categorydetailrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:listitem="@layout/categoryitem"
+        tools:listitem="@layout/categorydetailitem"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

@@ -6,42 +6,44 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mithilakshar.learnsource.Adapter.categoryAdapter
+import com.mithilakshar.learnsource.Adapter.categoryDetailAdapter
+import com.mithilakshar.learnsource.Adapter.pexamAdapter
 import com.mithilakshar.learnsource.R
 import com.mithilakshar.learnsource.Utility.dbHelper
-import com.mithilakshar.learnsource.databinding.ActivityCategoryBinding
+import com.mithilakshar.learnsource.databinding.ActivityPexamBinding
 
-class CategoryActivity : AppCompatActivity() {
+class PexamActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPexamBinding
 
-    private lateinit var binding: ActivityCategoryBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var categoryadapter: categoryAdapter
     private lateinit var dbhelper: dbHelper
-
+    private lateinit var pexamAdapter: pexamAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding=ActivityCategoryBinding.inflate(layoutInflater)
+        binding=ActivityPexamBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val dbName = intent.getStringExtra("dbname")
-        Log.d("dbName", "db name $dbName.db")
-        Log.d("dbName", "table name $dbName")
-        dbhelper=dbHelper(this@CategoryActivity, "$dbName.db")
-
+        dbhelper=dbHelper(this@PexamActivity, "$dbName.db")
+        Log.d("dbname", "File: $dbName,")
+        Log.d("dbname", "File:  $dbName.db")
         val subjectlist= dbName?.let { dbhelper.getAllRows(it) }
+        Log.d("dbname", "File:  $subjectlist")
 
-        Log.d("dbName", "table name $subjectlist")
-       categoryadapter= subjectlist?.let { categoryAdapter(this, it,dbhelper,dbName) }!!
-        recyclerView=binding.categoryrecycler
-       recyclerView.layoutManager=LinearLayoutManager(this)
-       recyclerView.adapter=categoryadapter
+        pexamAdapter= subjectlist?.let { pexamAdapter(this, it )}!!
+        recyclerView=binding.pexamrecycler
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.adapter=pexamAdapter
+
     }
 }

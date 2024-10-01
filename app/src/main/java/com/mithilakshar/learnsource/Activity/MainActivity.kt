@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.pexams.setOnClickListener {
-            startCategoryActivity(this,"pexams" )
+            val intent = Intent(this, PexamActivity::class.java)
+            intent.putExtra("dbname", "pexams")
+            startActivity(intent)
         }
 
 
@@ -75,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         val filesWithIds = listOf(
             Pair("maths", 1),
+            Pair("pexams", 2),
         )
 
         lifecycleScope.launch {

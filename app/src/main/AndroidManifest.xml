@@ -14,13 +14,22 @@
         android:theme="@style/Theme.LearnSource"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.CategoryActivity"
-            android:screenOrientation="portrait"
+            android:name=".Activity.PexamActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CategoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CategoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activity.SplashActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +38,7 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
