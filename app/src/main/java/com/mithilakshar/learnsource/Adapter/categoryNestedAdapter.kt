@@ -5,18 +5,16 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mithilakshar.learnsource.Activity.CategoryDetailActivity
 import com.mithilakshar.learnsource.Activity.QuizActivity
 import com.mithilakshar.learnsource.Data.QuizData
-import com.mithilakshar.learnsource.Data.categorynestedlistdataclass
 import com.mithilakshar.learnsource.databinding.CategorynesteditemBinding
 
 
-class categoryNestedAdapter(private val context: Context, private var  categorynestedlist: List<Map<String, String>>) :  RecyclerView.Adapter<categoryNestedAdapter.nestedviewholder>(){
+class categoryNestedAdapter(private val context: Context, private var categorynestedlist: List<Map<String, Any?>>) :  RecyclerView.Adapter<categoryNestedAdapter.nestedviewholder>(){
 
 
     class nestedviewholder(var binding: CategorynesteditemBinding):RecyclerView.ViewHolder(binding.root){
-        fun itembind(currentdata: Map<String, String>, context: Context) {
+        fun itembind(currentdata: Map<String, Any?>, context: Context) {
 
             binding.root.setOnClickListener {
                 val intent = Intent(context, QuizActivity::class.java)

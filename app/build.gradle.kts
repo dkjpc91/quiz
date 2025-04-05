@@ -1,13 +1,21 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     kotlin("kapt")
 }
+val localProperties = Properties().apply {
+    // Load properties from local.properties file
+    load(project.rootProject.file("local.properties").inputStream())
+}
+
 
 android {
     namespace = "com.mithilakshar.learnsource"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.mithilakshar.learnsource"
@@ -19,13 +27,26 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+
+
     buildTypes {
+        debug {
+            buildConfigField("boolean", "FIREBASE_ANALYTICS_ENABLED", "false")
+            buildConfigField("String", "sUrl",  localProperties.getProperty("sUrl"))
+            buildConfigField("String", "sK",  localProperties.getProperty("sK"))
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigField("boolean", "FIREBASE_ANALYTICS_ENABLED", "true")
+            buildConfigField("String", "sUrl",  localProperties.getProperty("sUrl"))
+            buildConfigField("String", "sK",  localProperties.getProperty("sK"))
         }
     }
     compileOptions {
@@ -36,12 +57,20 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures{
-        viewBinding=true
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
     }
 }
 
+
 dependencies {
+
+    implementation("io.ktor:ktor-client-cio:2.3.4")
+
+    implementation("io.github.jan-tennert.supabase:storage-kt:1.3.2")
+    implementation (libs.glide)
+    implementation (libs.android.lottie)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -49,10 +78,9 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.common)
-    implementation(libs.firebase.storage)
-    implementation(libs.firebase.analytics)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.messaging)
+    implementation(libs.play.services.ads.lite)
+
 
     annotationProcessor(libs.androidx.room.room.compiler)
     kapt(libs.androidx.room.room.compiler)

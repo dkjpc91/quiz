@@ -30,7 +30,7 @@ class UpdateChecker(private val updatesDao: UpdatesDao) {
                         "a"
                     } else {
                         // Update required, return the action string
-                        val masterupdate = updatesDao.findById(99)
+                        val masterupdate = updatesDao.findById(100)
                         masterupdate?.let {
                             it.uniqueString = actions
                             updatesDao.update(it)

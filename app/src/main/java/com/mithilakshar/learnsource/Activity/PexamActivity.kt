@@ -9,8 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mithilakshar.learnsource.Adapter.PExamsAdapter
 import com.mithilakshar.learnsource.Adapter.categoryDetailAdapter
-import com.mithilakshar.learnsource.Adapter.pexamAdapter
 import com.mithilakshar.learnsource.R
 import com.mithilakshar.learnsource.Utility.dbHelper
 import com.mithilakshar.learnsource.databinding.ActivityPexamBinding
@@ -20,7 +20,6 @@ class PexamActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var dbhelper: dbHelper
-    private lateinit var pexamAdapter: pexamAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +31,25 @@ class PexamActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val dbName = "PExamsMasterFile.db"
+        val categoryname = intent.getStringExtra("categoryname")
+        dbhelper=dbHelper(this@PexamActivity, dbName)
 
-        val dbName = intent.getStringExtra("dbname")
-        dbhelper=dbHelper(this@PexamActivity, "$dbName.db")
+        val groupedData = dbhelper.getAllRowsFromMasterFile()
+        val adapter = groupedData?.let { PExamsAdapter(this, it) }
+
+        Log.d("DBHelperDebug", "Grouped Data for '': $groupedData")
+        groupedData?.forEachIndexed { index, row ->
+            Log.d("DBHelperDebug", "Row $index: $row")
+        }
         Log.d("dbname", "File: $dbName,")
         Log.d("dbname", "File:  $dbName.db")
-        val subjectlist= dbName?.let { dbhelper.getAllRows(it) }
-        Log.d("dbname", "File:  $subjectlist")
 
-        pexamAdapter= subjectlist?.let { pexamAdapter(this, it )}!!
+
+
         recyclerView=binding.pexamrecycler
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerView.adapter=pexamAdapter
+        recyclerView.layoutManager = GridLayoutManager(this, 1)
+        recyclerView.adapter=adapter
 
     }
 }

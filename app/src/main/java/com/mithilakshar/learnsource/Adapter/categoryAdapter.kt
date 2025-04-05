@@ -7,77 +7,69 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mithilakshar.learnsource.Activity.CategoryDetailActivity
 import com.mithilakshar.learnsource.Data.categorynestedlistdataclass
-import com.mithilakshar.learnsource.Utility.dbHelper
 import com.mithilakshar.learnsource.databinding.CategoryitemBinding
-import java.io.Serializable
 
 class categoryAdapter(
     private val context: Context,
-    private val categorylist: List<Map<String, String>>,
-    private var dbHelper: dbHelper,
-    private val     dbName: String?
-) :  RecyclerView.Adapter<categoryAdapter.categoryViewHolder>(){
+    private val subcategoryList: List<Map<String, Any?>>
+) : RecyclerView.Adapter<categoryAdapter.categoryViewHolder>() {
 
-    val uniqueCategoryList = getUniqueCategoryList(categorylist)
+    private val uniquesubCategoryList = getUniqueCategoryList(subcategoryList)
 
     class categoryViewHolder(val binding: CategoryitemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: Map<String, String>,context: Context,categorylist:List<Map<String, String>>) {
-            binding.categoryTitle.text = category["category"]
-            val categoryvalue= category["category"]
-            val nestedCategoryList = categoryvalue?.let { filterByCategory(categorylist, it) }
-            val nestedAdapter = nestedCategoryList?.let { categoryNestedAdapter(context, it) }
-             binding.nestedcategoryrecycler .adapter = nestedAdapter
 
+        fun bind(
+            categoryMap: Map<String, Any>,
+            fullList: List<Map<String, Any?>>,
+            context: Context
+        ) {
+            val subcategoryName = categoryMap["subcategory"]?.toString() ?: ""
+            binding.categoryTitle.text = subcategoryName.replaceFirstChar { it.uppercaseChar() }
+
+            // Use only items matching this category (no conversion)
+            val nestedList = fullList.filter { it["subcategory"]?.toString() == subcategoryName }
+
+            // Pass as-is to nested adapter (assuming it accepts Map<String, Any>)
+            val nestedAdapter = categoryNestedAdapter(context, nestedList)
+            binding.nestedcategoryrecycler.adapter = nestedAdapter
+
+            // Handle See All click
             binding.seeAllBtn.setOnClickListener {
-                val intent= Intent(context,CategoryDetailActivity::class.java)
+                val intent = Intent(context, CategoryDetailActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                val category = categorynestedlistdataclass(nestedCategoryList ?: emptyList())
-                intent.putExtra("nestedCategoryList", category)
+
+                // Still requires conversion if categorynestedlistdataclass expects Map<String, String>
+                val categoryData = categorynestedlistdataclass(
+                    nestedList.map { it.mapValues { entry -> entry.value.toString() } }
+                )
+                intent.putExtra("nestedCategoryList", categoryData)
                 context.startActivity(intent)
-
             }
-
-
-        }
-
-        fun filterByCategory(categoryList: List<Map<String, String>>, categoryValue: String): List<Map<String, String>> {
-            return categoryList.filter { it["category"] == categoryValue }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): categoryViewHolder {
-        var binding= CategoryitemBinding.inflate( LayoutInflater.from(parent.context), parent, false)
+        val binding = CategoryitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return categoryViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return uniqueCategoryList.size
-    }
-
     override fun onBindViewHolder(holder: categoryViewHolder, position: Int) {
-        val currentdata=uniqueCategoryList.get(position)
-        return holder.bind(currentdata, context,categorylist)
+        val categoryMap = uniquesubCategoryList[position]
+        holder.bind(categoryMap, subcategoryList, context)
     }
 
+    override fun getItemCount(): Int = uniquesubCategoryList.size
 
+    private fun getUniqueCategoryList(list: List<Map<String, Any?>>): List<Map<String, Any>> {
+        val seenCategories = mutableSetOf<String>()
+        val uniqueList = mutableListOf<Map<String, Any>>()
 
-
-
-    fun getUniqueCategoryList(categoryList: List<Map<String, String>>): List<Map<String, String>> {
-        val uniqueCategories = mutableSetOf<String>()
-        val uniqueList = mutableListOf<Map<String, String>>()
-
-        for (item in categoryList) {
-            val category = item["category"]
-            // Check if the category is unique
-            if (category != null && uniqueCategories.add(category)) {
-                uniqueList.add(item) // Add the whole map for the first occurrence of the category
+        for (item in list) {
+            val category = item["subcategory"]?.toString()
+            if (category != null && seenCategories.add(category)) {
+                uniqueList.add(item as Map<String, Any>)
             }
         }
         return uniqueList
     }
-
-
-
 }
-

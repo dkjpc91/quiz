@@ -14,11 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/logo"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:visibility="visible"
+        android:id="@+id/homeviewloading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
 
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbanner"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:background="@android:color/transparent"
 
@@ -87,6 +96,8 @@
 
 
     <androidx.core.widget.NestedScrollView
+    android:id="@+id/mainview"
+        android:visibility="gone"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

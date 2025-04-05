@@ -31,16 +31,20 @@ class CategoryActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val dbName = intent.getStringExtra("dbname")
-        Log.d("dbName", "db name $dbName.db")
-        Log.d("dbName", "table name $dbName")
-        dbhelper=dbHelper(this@CategoryActivity, "$dbName.db")
+        val categoryname = intent.getStringExtra("categoryname")
+        Log.d("dbName", "db name $categoryname.db")
+        Log.d("dbName", "table name $categoryname")
+        val dbName = "LearnSourceMasterFile.db"
+        dbhelper = dbHelper(this, dbName)
 
-        val subjectlist= dbName?.let { dbhelper.getAllRows(it) }
+        val groupedData = categoryname?.let { dbhelper.getRowsByCategoryname(it) }
+        Log.d("DBHelperDebug", "Grouped Data for '': $groupedData")
+        groupedData?.forEachIndexed { index, row ->
+            Log.d("DBHelperDebug", "Row $index: $row")
+        }
 
-        Log.d("dbName", "table name $subjectlist")
-       categoryadapter= subjectlist?.let { categoryAdapter(this, it,dbhelper,dbName) }!!
-        recyclerView=binding.categoryrecycler
+       categoryadapter = groupedData?.let { categoryAdapter(this, it) }!!
+      recyclerView=binding.categoryrecycler
        recyclerView.layoutManager=LinearLayoutManager(this)
        recyclerView.adapter=categoryadapter
     }

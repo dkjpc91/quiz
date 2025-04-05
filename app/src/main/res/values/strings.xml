@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LearnSource</string>
+
+    //test
+    <string name="caprod">"ca-app-pub-3940256099942544~3347511713"</string>
+    <string name="bannerunithome1">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

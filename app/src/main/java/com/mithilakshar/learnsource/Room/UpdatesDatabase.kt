@@ -52,15 +52,10 @@ abstract class UpdatesDatabase : RoomDatabase() {
 
     private suspend fun prepopulateDatabase(updatesDao: UpdatesDao) {
         // Insert dummy data here
-        val gita = Updates(id = 4 , fileName = "Gita.db", uniqueString = "Gita")
-        val holiday = Updates(id = 2, fileName = "holiday.db", uniqueString = "holiday")
-        val mantra = Updates(id = 1, fileName = "mantra.db", uniqueString = "mantra")
-        val calander = Updates(id = 3, fileName = "calander.db", uniqueString = "calander")
-        val vrat = Updates(id = 5, fileName = "vrat.db", uniqueString = "vrat")
-        val masterupdate = Updates(id = 99 , fileName = "masterupdate.db", uniqueString = "n")
+
+        val masterupdate = Updates(id = 100 , fileName = "masterupdate.db", uniqueString = "n")
 
 
-        updatesDao.insert(gita)
         updatesDao.insert(masterupdate)
 
 
