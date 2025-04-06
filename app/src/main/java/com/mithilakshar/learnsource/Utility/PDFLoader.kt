@@ -2,17 +2,19 @@
 
 import android.content.Context
 import android.view.View
+import android.widget.TextView
 import com.github.barteksc.pdfviewer.PDFView
 
 import java.io.File
 
-class PDFLoader(private val context: Context) {
+class PDFLoader(private val context: Context,) {
 
     companion object {
         private const val PDF_FOLDER_NAME = "test"
     }
 
-    fun loadPdf(pdfView: PDFView, fileName: String) {
+
+    fun loadPdf(pdfView: PDFView, fileName: String,textView: TextView) {
         val pdfFile = getPdfFile(fileName)
 
         if (!pdfFile.exists()) {
@@ -28,6 +30,10 @@ class PDFLoader(private val context: Context) {
             password(null)
             enableAntialiasing(true)
             spacing(0)
+
+            onPageChange { page, pageCount ->
+                textView.text = "Page ${page + 1} of $pageCount"
+            }
             load()
         }
     }

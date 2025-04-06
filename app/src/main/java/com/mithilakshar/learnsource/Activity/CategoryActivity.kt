@@ -1,7 +1,10 @@
 package com.mithilakshar.learnsource.Activity
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -51,6 +54,8 @@ class CategoryActivity : AppCompatActivity() {
       recyclerView=binding.categoryrecycler
        recyclerView.layoutManager=LinearLayoutManager(this)
        recyclerView.adapter=categoryadapter
+
+        displayGroupedData(this, groupedData, binding.alertTextView,recyclerView)
     }
 
 
@@ -70,4 +75,36 @@ class CategoryActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun displayGroupedData(
+        context: Context,
+        groupedData: List<Map<String, Any?>>?,
+        textView: TextView,
+        recyclerView: RecyclerView
+    ) {
+        if (groupedData.isNullOrEmpty()) {
+            // Show alert-style message in a "card"
+            textView.apply {
+                text = """
+                ⚠️ Update will be available soon.
+            """.trimIndent()
+
+                textSize = 16f
+                setPadding(32, 48, 32, 48)
+                setTextColor(context.getColor(android.R.color.black))
+                setBackgroundResource(R.drawable.bg1) // Use a drawable for rounded card effect
+                setCompoundDrawablesWithIntrinsicBounds(R.drawable.star, 0, 0, 0) // optional left icon
+                compoundDrawablePadding = 16
+            }
+
+            recyclerView.visibility=View.GONE
+        } else {
+            // Handle/display data
+            textView.text = "✅ Data successfully loaded."
+            textView.setBackgroundResource(0) // Remove card if needed
+            textView.visibility=View.GONE
+            recyclerView.visibility=View.VISIBLE
+        }
+    }
+
 }

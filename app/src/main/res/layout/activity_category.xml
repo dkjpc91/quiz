@@ -41,6 +41,18 @@
             android:layout_height="3dp"
             android:background="@drawable/bottom_nav_bg" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/alertTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:visibility="visible"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:background="@drawable/rounded_square" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryrecycler"
         android:layout_width="match_parent"

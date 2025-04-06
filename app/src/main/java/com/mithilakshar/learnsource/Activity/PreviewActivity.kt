@@ -69,33 +69,44 @@ class PreviewActivity : AppCompatActivity(), PdfDbFileDownloader.DownloadCallbac
 
         val Videourl = quizData?.data?.get("videourl").toString()
         val Quizurl = quizData?.data?.get("sourceurl").toString()
-/*        val Pdfurl = quizData?.data?.get("notesurl").toString()*/
+        val Pdfurl = quizData?.data?.get("notesurl").toString()
         val filename = quizData?.data?.get("codename").toString()
 
-        val Pdfurl = "https://www.dropbox.com/scl/fi/m4rl1msr4mbv3tbn143ye/GateEE1.pdf?rlkey=x6x7llx324ra7bmwdrs2eaewj&st=su3t3dnw&dl=1"
+        Log.d("QuizDebug", "Video URL: $Videourl")
+        Log.d("QuizDebug", "Quiz Source URL: $Quizurl")
+        Log.d("QuizDebug", "PDF URL: $Pdfurl")
+        Log.d("QuizDebug", "Code/File Name: $filename")
 
 
-        if (Videourl.isNullOrBlank()) {
-            // Do something else if the description is blank
-           binding.videoContainer.visibility=View.GONE
+        // Video section
+        if (Videourl.isNullOrBlank() || Videourl.equals("null", ignoreCase = true)) {
+            Log.d("QuizDebug", "Video URL is empty or 'null'. Hiding video container.")
+            binding.videoContainer.visibility = View.GONE
         } else {
-            // Proceed with using the description
-            binding.videoContainer.visibility=View.VISIBLE
+            Log.d("QuizDebug", "Video URL valid: $Videourl. Showing video container.")
+            binding.videoContainer.visibility = View.VISIBLE
         }
-        if (Quizurl.isNullOrBlank()) {
-            // Do something else if the description is blank
-            binding.quizContainer.visibility=View.GONE
+
+// Quiz section
+        if (Quizurl.isNullOrBlank() || Quizurl.equals("null", ignoreCase = true)) {
+            Log.d("QuizDebug", "Quiz URL is empty or 'null'. Hiding quiz container.")
+            binding.quizContainer.visibility = View.GONE
         } else {
-            // Proceed with using the description
-            binding.quizContainer.visibility=View.VISIBLE
+            Log.d("QuizDebug", "Quiz URL valid: $Quizurl. Showing quiz container.")
+            binding.quizContainer.visibility = View.VISIBLE
         }
-        if (Pdfurl.isNullOrBlank()) {
-            // Do something else if the description is blank
-            binding.notesContainer.visibility=View.GONE
+
+// Notes section
+        if (Pdfurl.isNullOrBlank() || Pdfurl.equals("null", ignoreCase = true)) {
+            Log.d("QuizDebug", "PDF URL is empty or 'null'. Hiding notes container.")
+            binding.notesContainer.visibility = View.GONE
         } else {
-            // Proceed with using the description
-            binding.notesContainer.visibility=View.VISIBLE
+            Log.d("QuizDebug", "PDF URL valid: $Pdfurl. Showing notes container.")
+            binding.notesContainer.visibility = View.VISIBLE
         }
+
+
+
 
 
         downloader = PdfDbFileDownloader(this, this)

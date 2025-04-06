@@ -42,7 +42,7 @@ class NotesActivity : AppCompatActivity() {
         Log.d("quizData", "codename: $quizData")
         pdfView = binding.pdfView
         pdfLoader = PDFLoader(this@NotesActivity)
-        pdfLoader.loadPdf(pdfView, pdfName)
+        pdfLoader.loadPdf(pdfView, pdfName,binding.pageNumberText)
 
 
     }
