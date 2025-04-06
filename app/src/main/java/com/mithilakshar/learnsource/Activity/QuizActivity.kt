@@ -1,34 +1,32 @@
 package com.mithilakshar.learnsource.Activity
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.mithilakshar.learnsource.Data.QuizData
 import com.mithilakshar.learnsource.R
-import com.mithilakshar.learnsource.Utility.UrlDownloader
-import com.mithilakshar.learnsource.Utility.dbHelper
+import com.mithilakshar.learnsource.Utility.*
 import com.mithilakshar.learnsource.databinding.ActivityQuizBinding
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import java.io.File
+import com.mithilakshar.mithilapanchang.Dialog.Networkdialog
+import com.mithilakshar.mithilapanchang.Notification.NetworkManager
 
 class QuizActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityQuizBinding
-    private lateinit var urlDownloader: UrlDownloader
-    private lateinit var dbhelper: dbHelper
+    companion object {
+        private const val TAG = "QuizActivity"
+    }
 
-    private lateinit var adView: AdView
+    private lateinit var binding: ActivityQuizBinding
+    private lateinit var dbhelper: dbHelper
+    private lateinit var quizManager: QuizManager
+    private var hasStartedNetworkTasks = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,51 +40,84 @@ class QuizActivity : AppCompatActivity() {
             insets
         }
 
-        val updateText: TextView = findViewById(R.id.updatetext)
-
-        // Get quizData and extract codename
+        setupAds()
+        setupAnimation()
+        setupNetworkHandling()
         val quizData = intent.getSerializableExtra("quizData") as? QuizData
         val codeName = quizData?.data?.get("codename")?.toString() ?: "math1"
-        Log.d("codeName", "Codename: $codeName")
+        val dbName = "$codeName.db"
+        dbhelper = dbHelper(this, dbName)
 
-        // Initialize downloader
-        urlDownloader = UrlDownloader(this)
+        val questions: List<Map<String, Any?>> = dbhelper.quizdbdata(codeName)
+        Log.d(TAG, "Loaded ${questions.size} questions")
 
-        MobileAds.initialize(this) {}
+        // Show quiz UI and hide animation
+        binding.quizplaceholder.visibility = View.VISIBLE
+        binding.lottieView.visibility = View.GONE
 
-        adView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+        quizManager = QuizManager(
+            context = this,
+            questions = questions,
+            questionTextView = binding.instructionsText,
+            radioGroup = binding.radioGroup,
+            optionA = binding.radioButton1,
+            optionB = binding.radioButton2,
+            optionC = binding.radioButton3,
+            optionD = binding.radioButton4,
+            submitButton = binding.submitButton,
+            scoreTextView = binding.scoreText,
+            timerTextView = binding.timerText,
+            restartButton = binding.retakequiz,
+            quizplaceholder = binding.quizplaceholder,
+            lottieView = binding.lottieView,
 
-        // Use the actual codename as filename
-        lifecycleScope.launch {
-            checkFileExistsLive(this@QuizActivity, codeName).collectLatest { exists ->
-                updateText.text = if (exists) {
-                    "File $codeName.db exists ✅"
-                } else {
-                    "File $codeName.db is missing ❌"
-                }
-                Log.d("supabase", "File check result for $codeName: $exists")
-            }
-        }
+        )
 
-        // Sample button setup
-        binding.sharequiz.setOnClickListener {
-            // your logic here
-        }
+        quizManager.startQuiz()
     }
 
-    // Check file existence using Flow
-    private fun checkFileExistsLive(context: Context, fileName: String): Flow<Boolean> = flow {
-        try {
-            val folderPath = context.getExternalFilesDir(null)?.absolutePath + File.separator + "test"
-            val folder = File(folderPath).apply { if (!exists()) mkdirs() }
-            val dbFile = File(folder, "$fileName.db")
-            val exists = dbFile.exists()
-            emit(exists)
-        } catch (e: Exception) {
-            Log.e("supabase", "Error checking $fileName.db", e)
-            emit(false)
+    private fun setupAds() {
+        Log.d(TAG, "Initializing ads")
+        MobileAds.initialize(this)
+        binding.adView.loadAd(AdRequest.Builder().build())
+    }
+
+    private fun setupAnimation() {
+        Log.d(TAG, "Playing Lottie animation")
+
+
+        binding.lottieView.playAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
+    private fun setupNetworkHandling() {
+        val networkDialog = Networkdialog(this)
+        val networkManager = NetworkManager(this)
+
+        networkManager.observe(this) { isConnected ->
+            if (!isConnected) {
+                if (!networkDialog.isShowing) networkDialog.show()
+            } else {
+                if (networkDialog.isShowing) networkDialog.dismiss()
+
+                if (!hasStartedNetworkTasks) {
+                    hasStartedNetworkTasks = true
+                }
+            }
         }
-    }.flowOn(Dispatchers.IO)
+    }
 }

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray_background"
+    tools:context=".Activity.PreviewActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Book Cover with Shadow and Click Effect -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="24dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                <FrameLayout
+                    android:layout_width="180dp"
+                    android:layout_height="240dp">
+
+                    <ImageView
+                        android:id="@+id/bookCoverImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/reboot"
+                        android:contentDescription="@string/book_cover"/>
+
+                    <!-- Progress Indicator (Visible when downloading) -->
+                    <ProgressBar
+                        android:id="@+id/bookDownloadProgress"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Book Title -->
+            <TextView
+                android:id="@+id/bookTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Atomic Habits"
+                android:textColor="@color/blue"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Book Author -->
+            <TextView
+                android:id="@+id/bookdescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAlignment="center"
+                android:text="James Clear"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"/>
+
+            <!-- Resources Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginTop="32dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="8dp">
+
+                    <!-- Notes Item with Custom Icon -->
+                    <LinearLayout
+                        android:id="@+id/notesContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:background="@drawable/ripple_effect"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/notesIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_notes"
+                            app:tint="@color/blue"/>
+
+                        <TextView
+                            android:id="@+id/notesText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/study_notes"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/notesActionButton"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="140dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:text="@string/download"
+                            app:iconTint="@color/notes_icon"
+                            app:strokeColor="@color/notes_icon"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="18dp"/>
+
+                        <ImageView
+                            android:id="@+id/deleteIcon"
+                            android:visibility="invisible"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/delete"
+                            android:contentDescription="@string/app_name"
+                            app:tint="@color/red"/>
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/divider_color"/>
+
+                    <!-- Quiz Item with Custom Icon -->
+                    <LinearLayout
+                        android:id="@+id/quizContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:background="@drawable/ripple_effect"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/quizIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_quiz"
+                            app:tint="@color/quiz_icon"/>
+
+                        <TextView
+                            android:id="@+id/quizText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/practice_quiz"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/quizActionButton"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="140dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:text="@string/download"
+                            app:iconTint="@color/quiz_icon"
+                            app:strokeColor="@color/quiz_icon"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="18dp"/>
+
+                        <ImageView
+                            android:id="@+id/quizDeleteIcon"
+                            android:visibility="invisible"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/delete"
+                            android:contentDescription="@string/app_name"
+                            app:tint="@color/red"/>
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/divider_color"/>
+
+                    <!-- Video Item with Custom Icon -->
+                    <LinearLayout
+                        android:id="@+id/videoContainer"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:background="@drawable/ripple_effect"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/videoIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_video"
+                            app:tint="@color/video_icon"/>
+
+                        <TextView
+                            android:id="@+id/videoText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/video_lectures"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/videoActionButton"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="140dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:text="@string/open"
+                            app:iconTint="@color/video_icon"
+                            app:strokeColor="@color/video_icon"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="18dp"/>
+
+                        <ImageView
+                            android:id="@+id/videoDeleteIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/star"
+                            android:contentDescription="@string/app_name"
+                            app:tint="@color/red"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

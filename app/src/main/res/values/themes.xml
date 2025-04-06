@@ -8,7 +8,9 @@
     <style name="Theme.LearnSource" parent="Base.Theme.LearnSource" />
 
     <style name="CollapsedTitleTextStyle">
-        <item name="android:textSize">35sp</item> <item name="android:textColor">#F41505</item>  </style>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">#F41505</item>
+    </style>
 
     <style name="gridtextstyle">
         <item name="android:textSize">21sp</item>

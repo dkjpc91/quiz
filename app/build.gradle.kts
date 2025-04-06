@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     kotlin("kapt")
+    id ("kotlin-parcelize")
 }
 val localProperties = Properties().apply {
     // Load properties from local.properties file
@@ -67,6 +68,7 @@ android {
 dependencies {
 
     implementation("io.ktor:ktor-client-cio:2.3.4")
+    implementation (libs.android.pdf.viewer)
 
     implementation("io.github.jan-tennert.supabase:storage-kt:1.3.2")
     implementation (libs.glide)
@@ -80,6 +82,8 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.firebase.firestore)
     implementation(libs.play.services.ads.lite)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
 
     annotationProcessor(libs.androidx.room.room.compiler)

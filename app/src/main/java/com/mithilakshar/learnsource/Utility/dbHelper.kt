@@ -45,7 +45,7 @@ class dbHelper(context: Context, dbName: String) {
             val columnNames = listOf(
                 "sno", "category", "subcategory", "name",
                 "description", "image", "sourceurl", "audiourl",
-                "videourl", "codename"
+                "videourl", "codename","notesurl","quiztype"
             )
 
             database.rawQuery(query, arrayOf(categoryInput))?.use { cursor ->
@@ -78,7 +78,7 @@ class dbHelper(context: Context, dbName: String) {
             val columnNames = listOf(
                 "sno", "category", "subcategory", "name",
                 "description", "image", "sourceurl", "audiourl",
-                "videourl", "codename"
+                "videourl", "codename","notesurl","quiztype"
             )
 
             database.rawQuery(query, null)?.use { cursor ->
@@ -98,6 +98,34 @@ class dbHelper(context: Context, dbName: String) {
 
 
 
+    @SuppressLint("Range")
+    fun quizdbdata(tableName: String): List<Map<String, Any?>> {
+        val maxRows = 100
+        val allRows = mutableListOf<Map<String, Any?>>()
+
+        db?.let { database ->
+            if (!database.isOpen) {
+                Log.w(TAG, "Database not open for reading from $tableName")
+                return emptyList()
+            }
+
+            val query = "SELECT * FROM $tableName LIMIT $maxRows"
+
+            database.rawQuery(query, null)?.use { cursor ->
+                val columnNames = cursor.columnNames
+                while (cursor.moveToNext()) {
+                    val rowData = mutableMapOf<String, Any?>()
+                    for (columnName in columnNames) {
+                        val value = cursor.getString(cursor.getColumnIndex(columnName))
+                        rowData[columnName] = value
+                    }
+                    allRows.add(rowData)
+                }
+            }
+        }
+
+        return allRows
+    }
 
 
 

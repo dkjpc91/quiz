@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="@+id/materialCardView" />
 
     <TextView
-        android:id="@+id/mAuthorName"
+        android:id="@+id/mdescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -76,17 +76,4 @@
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
         app:layout_constraintTop_toBottomOf="@+id/mBookTitle" />
 
-    <TextView
-        android:id="@+id/mBookDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:text="description_4"
-        android:textColor="#F44336"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/mAuthorName"
-        app:layout_constraintStart_toStartOf="@+id/mAuthorName"
-        app:layout_constraintTop_toBottomOf="@+id/mAuthorName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

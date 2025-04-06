@@ -14,12 +14,15 @@ import com.mithilakshar.learnsource.Adapter.categoryDetailAdapter
 import com.mithilakshar.learnsource.R
 import com.mithilakshar.learnsource.Utility.dbHelper
 import com.mithilakshar.learnsource.databinding.ActivityPexamBinding
+import com.mithilakshar.mithilapanchang.Dialog.Networkdialog
+import com.mithilakshar.mithilapanchang.Notification.NetworkManager
 
 class PexamActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPexamBinding
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var dbhelper: dbHelper
+    private var hasStartedNetworkTasks = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,7 @@ class PexamActivity : AppCompatActivity() {
         val dbName = "PExamsMasterFile.db"
         val categoryname = intent.getStringExtra("categoryname")
         dbhelper=dbHelper(this@PexamActivity, dbName)
-
+        setupNetworkHandling()
         val groupedData = dbhelper.getAllRowsFromMasterFile()
         val adapter = groupedData?.let { PExamsAdapter(this, it) }
 
@@ -51,5 +54,22 @@ class PexamActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 1)
         recyclerView.adapter=adapter
 
+    }
+
+    private fun setupNetworkHandling() {
+        val networkDialog = Networkdialog(this)
+        val networkManager = NetworkManager(this)
+
+        networkManager.observe(this) { isConnected ->
+            if (!isConnected) {
+                if (!networkDialog.isShowing) networkDialog.show()
+            } else {
+                if (networkDialog.isShowing) networkDialog.dismiss()
+
+                if (!hasStartedNetworkTasks) {
+                    hasStartedNetworkTasks = true
+                }
+            }
+        }
     }
 }

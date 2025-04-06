@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg2">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_marginTop="30dp"
+
+            android:id="@+id/downloadAnimation"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
+
+        <TextView
+
+            android:id="@+id/downloadStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Downloading files..."
+            android:textSize="16sp" />
+
+        <TextView
+
+            android:id="@+id/downloadProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="Preparing download..."
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/cancelButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Cancel Download"
+            android:backgroundTint="@color/colorAccent" />
+
+    </LinearLayout>
+

@@ -11,6 +11,26 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="red">#FF0000</color>
 
     <color name="lavender">#8692f7</color>
+    <color name="light_gray_background">#F5F5F5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="divider_color">#E0E0E0</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="ripple_color">#1F000000</color>
+
+    <!-- Resource type accent colors -->
+    <color name="notes_icon">#FF4081</color>
+    <color name="quiz_icon">#3F51B5</color>
+    <color name="video_icon">#4CAF50</color>
+
+    <!-- Material colors -->
+
 </resources>
