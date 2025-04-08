@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.github.barteksc.pdfviewer.PDFView
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 
 import java.io.File
 
@@ -22,14 +23,19 @@ class PDFLoader(private val context: Context,) {
             return
         }
 
+
         pdfView.fromFile(pdfFile).apply {
-            enableSwipe(true)
+            enableSwipe(true) // Allow swiping
+            swipeHorizontal(false) // true = horizontal, false = vertical (choose based on your UX)
             enableDoubletap(true)
             defaultPage(0)
-            enableAnnotationRendering(false)
+            enableAnnotationRendering(true)
             password(null)
             enableAntialiasing(true)
             spacing(0)
+
+            // ✅ Show a scroll handle for quick navigation
+            scrollHandle(DefaultScrollHandle(context)) // Or your fragment context
 
             onPageChange { page, pageCount ->
                 textView.text = "Page ${page + 1} of $pageCount"

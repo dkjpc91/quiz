@@ -1,5 +1,6 @@
 package com.mithilakshar.learnsource.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -54,6 +55,27 @@ class QuizActivity : AppCompatActivity() {
         // Show quiz UI and hide animation
         binding.quizplaceholder.visibility = View.VISIBLE
         binding.lottieView.visibility = View.GONE
+
+        binding.sharequiz.setOnClickListener {
+            val randomValue = (1..100).random()
+            Log.d("ShareDebug", "Random Value: $randomValue")
+
+            if (randomValue <= 50) {
+                ViewShareUtil.shareViewAsImageDirectly(binding.quizcard, this)
+            } else {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_SUBJECT, "Check out this app")
+                    putExtra(Intent.EXTRA_TEXT, "Download our app: https://play.google.com/store/apps/details?id=com.mithilakshar.learnsource")
+                }
+                startActivity(Intent.createChooser(shareIntent, "Share via"))
+            }
+
+
+
+
+
+        }
 
         quizManager = QuizManager(
             context = this,

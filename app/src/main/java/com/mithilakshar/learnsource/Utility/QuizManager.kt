@@ -50,7 +50,10 @@ class QuizManager(
         loadQuestion()
 
         submitButton.setOnClickListener { handleSubmit() }
-        restartButton.setOnClickListener { startQuiz() }
+        restartButton.setOnClickListener { startQuiz()
+            score=0
+            scoreTextView.text = "Score: $score"
+        }
     }
 
     private fun loadQuestion() {

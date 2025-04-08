@@ -12,10 +12,11 @@
 
     <!-- AdMob Banner AdView -->
     <com.google.android.gms.ads.AdView
+        android:layout_marginTop="4dp"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:adSize="BANNER"
+        ads:adSize="LARGE_BANNER"
         ads:adUnitId="@string/bannerunithome1"
         android:layout_alignParentTop="true" />
 
@@ -79,42 +80,46 @@
 
 
     <!-- Quiz Card -->
+
+
+    <!-- Bottom Buttons -->
     <androidx.cardview.widget.CardView
         android:id="@+id/quizcard"
 
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_above="@+id/actionButtonLayout"
+        android:layout_below="@+id/adView"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="109dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#CBFBEE"
         app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        android:backgroundTint="#CBFBEE">
+        app:cardElevation="4dp">
 
         <LinearLayout
             android:id="@+id/quizplaceholder"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/instructionsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Instructions"
-                android:textSize="16sp"
-                android:textColor="#D20E04" />
+                android:textColor="#D20E04"
+                android:textSize="16sp" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
 
                 <RadioButton
                     android:id="@+id/radioButton1"
@@ -147,30 +152,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/submit"
                 android:background="@android:color/transparent"
-                android:contentDescription="Submit" />
+                android:contentDescription="Submit"
+                android:src="@drawable/submit" />
         </LinearLayout>
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lottie_rawRes="@raw/a4"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
             app:lottie_autoPlay="true"
             app:lottie_loop="true   "
-            android:layout_marginTop="16dp"
-            android:visibility="visible"/>
+            app:lottie_rawRes="@raw/a4" />
 
     </androidx.cardview.widget.CardView>
 
-
-
-
-
-
-
-
-    <!-- Bottom Buttons -->
     <LinearLayout
         android:id="@+id/actionButtonLayout"
         android:layout_alignParentBottom="true"
